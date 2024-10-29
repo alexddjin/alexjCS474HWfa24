@@ -1,0 +1,20 @@
+(declare-const l1 Real)
+(declare-const l2 Real)
+(declare-const l3 Real)
+(declare-const l4 Real)
+(declare-const u1 Real)
+(declare-const u2 Real)
+(declare-const u3 Real)
+(declare-const u4 Real)
+
+(declare-fun f (Real Real Real Real) Bool)
+(define-fun intersect ((a Real) (b Real) (c Real) (d Real)) Bool
+    (and (and (and (a < b) (c < d)) (a < d)) (b < c)))
+
+(assert (intersect l1 u1 l2 u2))
+(assert (intersect l3 u3 l2 u2))
+(assert (intersect l3 u3 l4 u4))
+(assert (intersect l1 u1 l4 u4))
+(assert (not (intersect l1 u1 l3 u3)))
+(assert (not (intersect l4 u4 l2 u2)))
+(check-sat)
